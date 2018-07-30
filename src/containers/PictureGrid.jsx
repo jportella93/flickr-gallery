@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { API } from '../store/middlewares/apiService'
+import styled from 'styled-components';
+
+import Picture from '../components/Picture'
+
+const Container = styled.div`
+  display: grid;
+  grid-template: 1fr /repeat(4,1fr);
+  width: 80vw;
+  `
 
 class PictureGrid extends Component {
   static propTypes = {
@@ -9,20 +18,24 @@ class PictureGrid extends Component {
     selectedPicture: PropTypes.object
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPictures()
-    setTimeout(this.props.fetchPictures(), 1000)
   }
 
   render() {
+    const { pictures } = this.props
+    console.log(this.props);
+
     return (
-      <h1>PictureGrid works!</h1>
+      <Container>
+        {pictures && pictures.map(p => <Picture picture={p}/>)}
+      </Container>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  pictures: state.pictures.pictures,
+  pictures: state.pictures.pictureList,
   selectedPicture: state.pictures.selectedPicture
 })
 

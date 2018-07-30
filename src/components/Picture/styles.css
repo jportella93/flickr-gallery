@@ -1,0 +1,43 @@
+:root {
+  --pic-size: 20vw;
+}
+
+.Picture {
+  color: rgba(255, 255, 255, 0);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.Picture:hover {
+  color: rgba(255, 255, 255, 1)
+}
+
+.Picture__img-mask,
+.Picture img {
+  width: var(--pic-size);
+  height: var(--pic-size);
+}
+
+.Picture__img-mask {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: none;
+  transition: background-color 0.3s ease;
+}
+
+.Picture__img-mask:hover {
+  background-color : rgba(255, 255, 255, 0.5);
+}
+
+.Picture img{
+  object-fit: cover;
+}
+
+.Picture__title {
+  position: absolute;
+  text-align: center;
+}
