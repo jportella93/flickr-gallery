@@ -8,8 +8,8 @@ import Picture from '../components/Picture'
 
 const Container = styled.div`
   display: grid;
-  grid-template: 1fr /repeat(4,1fr);
-  width: 80vw;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+  width: 100vw;
   `
 
 class PictureGrid extends Component {
@@ -24,7 +24,6 @@ class PictureGrid extends Component {
 
   render() {
     const { pictures } = this.props
-    console.log(this.props);
 
     return (
       <Container>

@@ -4,7 +4,7 @@
 
 .Picture {
   color: rgba(255, 255, 255, 0);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   position: relative;
 }
 
@@ -12,8 +12,10 @@
   color: rgba(255, 255, 255, 1)
 }
 
-.Picture__img-mask,
+.Picture, .Picture__img-mask,
 .Picture img {
+  min-width: 370px;
+  min-height: 370px;
   width: var(--pic-size);
   height: var(--pic-size);
 }

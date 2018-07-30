@@ -4,7 +4,6 @@ import './styles.css'
 export default class Picture extends Component {
   render() {
     const { picture } = this.props
-    console.log('XXXXXXXXXXXX', picture);
 
     return (
       <div className="Picture">
