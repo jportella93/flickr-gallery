@@ -8,8 +8,8 @@ import Picture from '../components/Picture'
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
-  width: 100vw;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  width: 80vw;
   `
 
 class PictureGrid extends Component {

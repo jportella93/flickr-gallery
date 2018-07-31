@@ -14,8 +14,6 @@
 
 .Picture, .Picture__img-mask,
 .Picture img {
-  min-width: 370px;
-  min-height: 370px;
   width: var(--pic-size);
   height: var(--pic-size);
 }
