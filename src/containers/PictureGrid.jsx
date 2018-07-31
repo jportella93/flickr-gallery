@@ -20,10 +20,23 @@ class PictureGrid extends Component {
 
   componentWillMount() {
     this.props.fetchPictures()
+    this.props.fetchPictures()
+    this.props.fetchPictures()
+  }
+
+  // fetches new pictures when scrolled almost till the bottom
+  lazyFetchPictures = () => {
+    const innerH = window.innerHeight,
+          scrollY = window.scrollY,
+          docH = document.documentElement.scrollHeight
+    window.addEventListener('scroll', (e) => {
+      if (innerH + scrollY >= docH - 100) this.props.fetchPictures()
+    })
   }
 
   render() {
-    const { pictures } = this.props
+    const { pictures } = this.props;
+    this.lazyFetchPictures()
 
     return (
       <Container>
