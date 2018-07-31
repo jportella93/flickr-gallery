@@ -9,7 +9,10 @@ export default class Picture extends Component {
       <div className="Picture">
         <img src={picture.sizes.size[5].source} alt={picture.title || 'Picture'}/>
         <div className="Picture__img-mask">
-          <h3 className="Picture__title">{picture.title || 'Title'}</h3>
+          <h3 className="Picture__title">
+            {picture.title || 'Title'} <br/>
+            By user {picture.owner || 'owner'}
+          </h3>
         </div>
       </div>
     )
