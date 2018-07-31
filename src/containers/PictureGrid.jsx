@@ -27,7 +27,7 @@ class PictureGrid extends Component {
 
     return (
       <Container>
-        {pictures && pictures.map(p => <Picture picture={p}/>)}
+        {pictures && pictures.map(p => <Picture key={p.id} picture={p}/>)}
       </Container>
     )
   }
