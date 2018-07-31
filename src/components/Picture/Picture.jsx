@@ -16,12 +16,12 @@ export default class Picture extends Component {
 
     return (
       <div className="Picture" onClick={() => handleClick(picture)}>
-        <img src={getAvailableSize(picture).source} alt={picture.title || 'Picture'}/>
+        <img src={getAvailableSize(picture)} alt={picture.title || 'Picture'}/>
         <div className="Picture__img-mask">
-          <h3 className="Picture__title">
-            {picture.title || 'Title'} <br/>
-            By user {picture.owner || 'owner'}
-          </h3>
+          <h2 className="Picture__title">
+            {picture.title || 'Title'} <br/> <br/>
+            <span>By user {picture.owner || 'owner'}</span>
+          </h2>
         </div>
       </div>
     )

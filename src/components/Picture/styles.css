@@ -6,6 +6,7 @@
   color: rgba(255, 255, 255, 0);
   transition: color 0.3s ease;
   position: relative;
+  cursor: pointer;
 }
 
 .Picture:hover {
@@ -40,4 +41,9 @@
 .Picture__title {
   position: absolute;
   text-align: center;
+  width: 80%;
+}
+
+.Picture__title span {
+  font-size: 0.8em;
 }

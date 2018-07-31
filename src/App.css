@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--p1-1);
+  overflow-wrap: break-word;
 }
 
 h1 {

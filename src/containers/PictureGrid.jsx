@@ -15,7 +15,7 @@ const Container = styled.div`
   row-gap: 50px;
   justify-items: center;
   width:90%;
-  margin-top: 5vmin;
+  margin: 5vmin 0;
   `
 
 class PictureGrid extends Component {
@@ -27,6 +27,8 @@ class PictureGrid extends Component {
   componentWillMount() {
     this.props.fetchPictures()
     this.props.fetchPictures()
+
+    //throttle method to avoid unnecesary calls to server
     this.lazyFetchPictures = throttle(this.props.fetchPictures, 500)
     this.listenForScrollAndFetch()
   }
