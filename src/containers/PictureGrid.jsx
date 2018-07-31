@@ -5,11 +5,15 @@ import { API } from '../store/middlewares/apiService'
 import styled from 'styled-components';
 
 import Picture from '../components/Picture'
+import SelectedPicture from '../components/SelectedPicture'
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  width: 80vw;
+  row-gap: 50px;
+  justify-items: center;
+  width:90%;
+  margin-top: 5vmin;
   `
 
 class PictureGrid extends Component {
