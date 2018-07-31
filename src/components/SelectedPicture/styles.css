@@ -1,0 +1,59 @@
+@import'../../sharedStyles.css';
+
+.SelectedPicture__outer {
+  background-color: rgba(42, 54, 59, .2);
+  opacity: 0;
+  transition: all 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.SelectedPicture__outer a {
+  text-decoration: none;
+}
+
+.SelectedPicture__outer:hover {
+  background-color: rgba(42, 54, 59, .8);
+  opacity: 1;
+}
+
+.SelectedPicture__inner {
+}
+
+.SelectedPicture__inner-container {
+  /* width: 80vw; */
+  max-width: 80vw;
+  opacity: 1;
+  color: white;
+  text-align: center;
+  /* border: solid 0px white; */
+  transition: all 0.3s ease;
+}
+
+.SelectedPicture__inner-container:hover {
+  font-size: 1.1em;
+}
+
+.SelectedPicture__inner-container h1 {
+  margin-bottom: 2vmin;
+}
+
+.SelectedPicture__inner-container h2, img {
+  margin-bottom: 1vmin;
+}
+
+.SelectedPicture__inner-container a>h2 {
+  color: rgba(254, 254, 254, 1);
+  transition: color 0.3s ease;
+}
+
+.SelectedPicture__inner-container a>h2:hover {
+  color: rgba(254, 254, 254, 0.5);
+}

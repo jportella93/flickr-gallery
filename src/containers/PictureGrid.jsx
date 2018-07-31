@@ -72,6 +72,10 @@ const mapDispatchToProps = dispatch => ({
       path: '/pictures'
     }
   }),
+  selectPicture: (picture) => dispatch({
+    type: 'SELECT_PICTURE',
+    data: picture
+  })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PictureGrid)

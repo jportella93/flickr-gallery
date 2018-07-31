@@ -1,5 +1,9 @@
+@import'./sharedStyles.css';
+
 .App {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--p1-1);
 }

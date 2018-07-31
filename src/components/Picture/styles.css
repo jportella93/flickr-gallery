@@ -9,7 +9,7 @@
 }
 
 .Picture:hover {
-  color: rgba(255, 255, 255, 1)
+  color: rgba(240, 240, 240, 1)
 }
 
 .Picture, .Picture__img-mask,
@@ -30,7 +30,7 @@
 }
 
 .Picture__img-mask:hover {
-  background-color : rgba(255, 255, 255, 0.5);
+  background-color : rgba(0, 0, 0, 0.4);
 }
 
 .Picture img{

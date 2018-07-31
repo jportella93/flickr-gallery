@@ -24,7 +24,7 @@ const pictures = (state = initialState, action) => {
     case 'SELECT_PICTURE':
       return {
         ...state,
-        [state.selectedPicture]: action.data
+        selectedPicture: action.data
       }
     default:
       return state;

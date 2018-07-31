@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import './styles.css'
 
-export default class Picture extends Component {
+import PropTypes from 'prop-types';
 
-  // Sometimes flickr doesn't have medium size, this function returns a small size as a fallback
-  getAvailableSize = (picture) => picture.sizes.size[5] ? picture.sizes.size[5] : picture.sizes.size[0]
+import { getAvailableSize } from '../../utils/pictures'
+
+export default class Picture extends Component {
+  static propTypes = {
+    picture: PropTypes.object.isRequired,
+    handleClick: PropTypes.func.isRequired
+  };
 
   render() {
-    const { picture } = this.props
+    const { picture, handleClick } = this.props
 
     return (
-      <div className="Picture">
-        <img src={this.getAvailableSize(picture).source} alt={picture.title || 'Picture'}/>
+      <div className="Picture" onClick={() => handleClick(picture)}>
+        <img src={getAvailableSize(picture).source} alt={picture.title || 'Picture'}/>
         <div className="Picture__img-mask">
           <h3 className="Picture__title">
             {picture.title || 'Title'} <br/>
