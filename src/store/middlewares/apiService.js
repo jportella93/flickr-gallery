@@ -19,7 +19,8 @@ export default baseURL => store => next => action => {
         };
         delete newAction[API];
         store.dispatch(newAction);
-      });
+      })
+      .catch(e => console.error(e))
   }
   next(action);
 };
