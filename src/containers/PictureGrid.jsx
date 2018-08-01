@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
-import Spinner from '../components/Spinner'
+import PictureLoader from '../components/PictureLoader';
 
 import throttle from 'lodash.throttle';
 
@@ -27,6 +27,7 @@ class PictureGrid extends Component {
   };
 
   componentWillMount() {
+    // Initial two calls to server
     this.props.fetchPictures()
     this.props.fetchPictures()
 
@@ -44,6 +45,29 @@ class PictureGrid extends Component {
     })
   }
 
+  renderPictures = (pictures) => {
+
+    const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
+    return [
+      ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />),
+      this.renderPictureLoaders(pictureLoaders)
+    ]
+  }
+
+  renderPictureLoaders = (num) => {
+    // Calculate the opacity for each loader so it results in a nice scaling down grayscale
+    let res = []
+    const step = 1 / num;
+    for (let i = 1; i <= num; i++) {
+      let opacity = step * i
+      if (opacity === 1) opacity -= 0.1
+      res.push(opacity)
+    }
+    res = res.reverse()
+
+    return res.map(n => <PictureLoader opacity={n.toFixed(1)} key={n}/>)
+  }
+
   selectPicture = (picture) => {
     this.props.selectPicture(picture)
   }
@@ -51,12 +75,10 @@ class PictureGrid extends Component {
   render() {
     const { pictures, selectedPicture } = this.props;
 
+
     return (
       <Container>
-        {pictures.length > 0
-          ? pictures.map(p =>
-            <Picture key={p.id} picture={p} handleClick={this.selectPicture}/>)
-          : <Spinner />}
+        {pictures && this.renderPictures(pictures)}
         {selectedPicture &&
           <SelectedPicture selectedPicture={selectedPicture}
           handleClick={this.selectPicture} />}
