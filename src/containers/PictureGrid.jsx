@@ -17,6 +17,7 @@ const Container = styled.div`
   column-gap:5vim;
   justify-items: center;
   width:100%;
+  margin: 5vmin 0;
   `
 
 class PictureGrid extends Component {
