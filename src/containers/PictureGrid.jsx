@@ -12,10 +12,10 @@ import throttle from 'lodash.throttle';
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  row-gap: 50px;
+  row-gap: 5vmin;
+  column-gap:5vim;
   justify-items: center;
-  width:90%;
-  margin: 5vmin 0;
+  width:100%;
   `
 
 class PictureGrid extends Component {

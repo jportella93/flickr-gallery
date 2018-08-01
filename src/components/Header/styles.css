@@ -1,0 +1,43 @@
+.Header {
+  color: rgba(230, 230, 230, 1);
+  text-align: center;
+  margin-top: 5vmin;
+  transition: all 0.3s ease;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  padding: 3vmin;
+}
+
+.Header h1 {
+  color: rgba(230, 230, 230, 1);
+  letter-spacing: 3px;
+  transition: all 0.8s ease;
+  cursor: default;
+}
+
+.Header h1:hover,
+.Header a:hover {
+  color: rgba(230, 230, 230, 0.3);
+}
+
+.Header h1:hover {
+  letter-spacing: 6px;
+}
+
+.Header h3 {
+  letter-spacing: 2px;
+  color: rgba(230, 230, 230, 0.6);
+  margin-top: 1vmin;
+}
+
+.Header a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.Header p {
+  margin-top:4vmin;
+  font-size:1.1em;
+  letter-spacing: 0.5px;
+}

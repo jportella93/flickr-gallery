@@ -1,0 +1,1 @@
+export const sliceExtra = (str, limit) => str.length < limit ? str : str.slice(0, limit) + '...'
