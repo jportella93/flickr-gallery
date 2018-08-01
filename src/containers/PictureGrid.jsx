@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
+import Spinner from '../components/Spinner'
 
 import throttle from 'lodash.throttle';
 
@@ -51,9 +52,10 @@ class PictureGrid extends Component {
 
     return (
       <Container>
-        {pictures &&
-          pictures.map(p =>
-            <Picture key={p.id} picture={p} handleClick={this.selectPicture}/>)}
+        {pictures.length > 0
+          ? pictures.map(p =>
+            <Picture key={p.id} picture={p} handleClick={this.selectPicture}/>)
+          : <Spinner />}
         {selectedPicture &&
           <SelectedPicture selectedPicture={selectedPicture}
           handleClick={this.selectPicture} />}
