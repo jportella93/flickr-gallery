@@ -25,7 +25,9 @@ or
 
     $ npm i
 
-**4.** Start the server
+**4.** Go to /src/config/api.config.js and make sure that line 1 (dev) is active and line 2 (prod) is commented out.
+
+**5.** Start the server
 
 ```
 $ yarn start
