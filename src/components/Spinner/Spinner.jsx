@@ -1,6 +1,6 @@
-/** https://codepen.io/woodwoerk/pen/YWjWzo
- * Samsung TV Loader by Joe Harry
- * https://codepen.io/woodwoerk
+/** Samsung TV Loader by Joe Harry
+ *  Link to pen https://codepen.io/woodwoerk/pen/YWjWzo
+ *  Link to Joe's profile https://codepen.io/woodwoerk
 */
 
 import React, { Component } from 'react';

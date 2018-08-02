@@ -9,7 +9,7 @@ export default class PictureLoader extends Component {
 
   render () {
     const { opacity } = this.props
-    var rand = Math.floor(Math.random() * 3) + 1
+    const rand = Math.floor(Math.random() * 3) + 1 // Random number between 1 and 3
 
     return (
       <div style={{

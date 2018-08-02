@@ -14,6 +14,13 @@
   cursor: default;
 }
 
+.Header a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
 .Header h1:hover,
 .Header a:hover {
   color: rgba(230, 230, 230, 0.3);
@@ -27,13 +34,6 @@
   letter-spacing: 2px;
   color: rgba(230, 230, 230, 0.6);
   margin-top: 1vmin;
-}
-
-.Header a {
-  text-decoration: none;
-  color: inherit;
-  font-weight: bold;
-  transition: all 0.3s ease;
 }
 
 .Header p {

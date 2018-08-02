@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import { API } from '../store/middlewares/apiService'
 import styled from 'styled-components';
+import throttle from 'lodash.throttle';
+
+import { API } from '../store/middlewares/apiService'
 
 import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
 import PictureLoader from '../components/PictureLoader';
-
-import throttle from 'lodash.throttle';
 
 const Container = styled.div`
   display: grid;
@@ -23,7 +23,9 @@ const Container = styled.div`
 class PictureGrid extends Component {
   static propTypes = {
     pictures: PropTypes.array,
-    selectedPicture: PropTypes.object
+    selectedPicture: PropTypes.object,
+    fetchPictures: PropTypes.func.isRequired,
+    selectPicture: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -33,20 +35,21 @@ class PictureGrid extends Component {
 
     //throttle method to avoid unnecesary calls to server
     this.lazyFetchPictures = throttle(this.props.fetchPictures, 500)
-    this.listenForScrollAndFetch()
+
+    this.listenForScrollAndFetch() // From this point on, only fetch on scroll
   }
 
-  // fetches new pictures when scrolled almost till the bottom
+  // fetch new pictures when scrolled almost till the bottom
   listenForScrollAndFetch = () => {
     window.addEventListener('scroll', (e) => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - window.innerHeight/2) {
+      if (window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - window.innerHeight/0.5) {
         this.lazyFetchPictures()
       }
     })
   }
 
   renderPictures = (pictures) => {
-
     const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
     return [
       ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />),
@@ -60,12 +63,10 @@ class PictureGrid extends Component {
     const step = 1 / num;
     for (let i = 1; i <= num; i++) {
       let opacity = step * i
-      if (opacity === 1) opacity -= 0.1
+      if (opacity === 1) opacity -= 0.1 // We don't want opacity === 1, too bright!
       res.push(opacity)
     }
-    res = res.reverse()
-
-    return res.map(n => <PictureLoader opacity={n.toFixed(1)} key={n}/>)
+    return res.reverse().map(n => <PictureLoader opacity={n.toFixed(1)} key={n} />)
   }
 
   selectPicture = (picture) => {

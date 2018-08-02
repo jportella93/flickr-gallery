@@ -19,7 +19,10 @@ const pictures = (state = initialState, action) => {
     case 'FETCH_PICTURES_SUCCESS':
       return {
         ...state,
-        pictureList: [...state.pictureList, ...discardRepeatedPics(state.pictureList, action.data)]
+        pictureList: [
+          ...state.pictureList,
+          ...discardRepeatedPics(state.pictureList, action.data)
+        ]
       };
     case 'SELECT_PICTURE':
       return {
