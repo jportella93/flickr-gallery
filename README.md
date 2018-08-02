@@ -1,10 +1,10 @@
-#Flickr gallery
+# Flickr gallery
 
 *Explore the most recent images uploaded to Flickr worldwide.*
 
 
 
-##Getting started
+## Getting started
 
 **1.** Go to the [server](https://github.com/jportella93/flickr-gallery-server) and follow the getting started. Once you've got it running come back here.
 
@@ -66,6 +66,6 @@ Jon Portella - [Github](https://github.com/jportella93) - [LinkedIn](https://www
 
 
 
-##License
+## License
 
 This project is licensed under the MIT License.
