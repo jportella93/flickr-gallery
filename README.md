@@ -25,7 +25,7 @@ or
 
     $ npm i
 
-**4. **Start the server
+**4.** Start the server
 
 ```
 $ yarn start
