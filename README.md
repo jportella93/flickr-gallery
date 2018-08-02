@@ -1,7 +1,8 @@
 # Flickr gallery
 
 *Explore the most recent images uploaded to Flickr worldwide.*
-Watch it live: https://jportella93.github.io/flickr-gallery/
+
+👉 [Flickr gallery](https://jportella93.github.io/flickr-gallery/)
 
 
 
