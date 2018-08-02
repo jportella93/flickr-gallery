@@ -11,7 +11,7 @@
 **2.** Clone the repo
 
 ````
-$ git clone https://github.com/jportella93/flickr-gallery.git$
+$ git clone https://github.com/jportella93/flickr-gallery.git
 $ cd flickr-gallery
 ````
 
