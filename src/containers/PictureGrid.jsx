@@ -75,6 +75,10 @@ class PictureGrid extends Component {
     this.props.selectPicture(picture)
   }
 
+  handleImagesLoaded(e) {
+    
+  }
+
   render() {
     const { pictures, selectedPicture } = this.props;
 
@@ -83,7 +87,7 @@ class PictureGrid extends Component {
       <Container>
          <Masonry
             className={'masonry-gallery'}
-            onLayoutComplete={this.onLayoutComplete}
+            onImagesLoaded={this.handleImagesLoaded}
         >
             {this.renderPictures(pictures)}
         </Masonry>
