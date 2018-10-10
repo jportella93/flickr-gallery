@@ -44,12 +44,19 @@ class PictureGrid extends Component {
   // fetch new pictures when scrolled almost till the bottom
   listenForScrollAndFetch = () => {
     window.addEventListener('scroll', (e) => {
-      if (window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - window.innerHeight/0.5) {
-        this.lazyFetchPictures()
+      const pictures = document.getElementsByClassName('Picture')
+      const lastPicture = pictures[pictures.length - 1]
+      if (lastPicture) {
+        const lastPicturePosition = Math.round(Number(lastPicture.style.top.split('px').join('')))
+        const scrollPosition = Math.round(window.scrollY)
+
+        if (scrollPosition + 1500 > lastPicturePosition) {
+          this.lazyFetchPictures()
+        }
       }
     })
   }
+
 
   renderPictures = (pictures) => {
     const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
@@ -75,19 +82,13 @@ class PictureGrid extends Component {
     this.props.selectPicture(picture)
   }
 
-  handleImagesLoaded(e) {
-    
-  }
-
   render() {
     const { pictures, selectedPicture } = this.props;
-
 
     return (
       <Container>
          <Masonry
             className={'masonry-gallery'}
-            onImagesLoaded={this.handleImagesLoaded}
         >
             {this.renderPictures(pictures)}
         </Masonry>
