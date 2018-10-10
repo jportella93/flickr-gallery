@@ -10,6 +10,8 @@ import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
 import PictureLoader from '../components/PictureLoader';
 
+import Masonry from 'react-masonry-component';
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -34,26 +36,25 @@ class PictureGrid extends Component {
     this.props.fetchPictures()
 
     //throttle method to avoid unnecesary calls to server
-    this.lazyFetchPictures = throttle(this.props.fetchPictures, 500)
+    this.lazyFetchPictures = throttle(this.props.fetchPictures, 1000)
 
     this.listenForScrollAndFetch() // From this point on, only fetch on scroll
   }
 
   // fetch new pictures when scrolled almost till the bottom
+
   listenForScrollAndFetch = () => {
-    window.addEventListener('scroll', (e) => {
-      if (window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - window.innerHeight/0.5) {
+    window.addEventListener('wheel', (e) => {
+      if (e.deltaY > 0) {
         this.lazyFetchPictures()
       }
     })
   }
 
+
   renderPictures = (pictures) => {
-    const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
     return [
-      ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />),
-      this.renderPictureLoaders(pictureLoaders)
+      ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />)
     ]
   }
 
@@ -76,10 +77,13 @@ class PictureGrid extends Component {
   render() {
     const { pictures, selectedPicture } = this.props;
 
-
     return (
       <Container>
-        {pictures && this.renderPictures(pictures)}
+         <Masonry
+            className={'masonry-gallery'}
+        >
+            {this.renderPictures(pictures)}
+        </Masonry>
         {selectedPicture &&
           <SelectedPicture selectedPicture={selectedPicture}
           handleClick={this.selectPicture} />}

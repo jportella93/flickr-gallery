@@ -1,5 +1,5 @@
 :root {
-  --pic-size: 400px;
+  --pic-size: 340px;
 }
 
 .Picture {
@@ -7,10 +7,15 @@
   transition: color 0.3s ease;
   position: relative;
   cursor: pointer;
+  margin: 10px;
 }
 
 .Picture:hover {
   color: rgba(240, 240, 240, 1)
+
+}
+.Picture__img-mask {
+  height: 100%;
 }
 
 .Picture, .Picture__img-mask,
@@ -18,7 +23,7 @@
   max-width: 90vmin;
   max-height: 90vmin;
   width: var(--pic-size);
-  height: var(--pic-size);
+  /*height: var(--pic-size);*/
 }
 
 .Picture__img-mask {

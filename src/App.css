@@ -15,3 +15,6 @@ h1 {
   font-weight: normal;
   letter-spacing: 0.1rem;
 }
+.masonry-gallery {
+  width: 1100px;
+}
