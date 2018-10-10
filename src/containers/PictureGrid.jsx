@@ -53,7 +53,6 @@ class PictureGrid extends Component {
 
 
   renderPictures = (pictures) => {
-    const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
     return [
       ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />)
     ]
