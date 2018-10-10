@@ -36,23 +36,17 @@ class PictureGrid extends Component {
     this.props.fetchPictures()
 
     //throttle method to avoid unnecesary calls to server
-    this.lazyFetchPictures = throttle(this.props.fetchPictures, 500)
+    this.lazyFetchPictures = throttle(this.props.fetchPictures, 1000)
 
     this.listenForScrollAndFetch() // From this point on, only fetch on scroll
   }
 
   // fetch new pictures when scrolled almost till the bottom
-  listenForScrollAndFetch = () => {
-    window.addEventListener('scroll', (e) => {
-      const pictures = document.getElementsByClassName('Picture')
-      const lastPicture = pictures[pictures.length - 1]
-      if (lastPicture) {
-        const lastPicturePosition = Math.round(Number(lastPicture.style.top.split('px').join('')))
-        const scrollPosition = Math.round(window.scrollY)
 
-        if (scrollPosition + 1500 > lastPicturePosition) {
-          this.lazyFetchPictures()
-        }
+  listenForScrollAndFetch = () => {
+    window.addEventListener('wheel', (e) => {
+      if (e.deltaY > 0) {
+        this.lazyFetchPictures()
       }
     })
   }
@@ -61,8 +55,7 @@ class PictureGrid extends Component {
   renderPictures = (pictures) => {
     const pictureLoaders = 5 // Number of loaders (blank images) at the end of the grid
     return [
-      ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />),
-      this.renderPictureLoaders(pictureLoaders)
+      ...pictures.map(p => <Picture key={p.id} picture={p} handleClick={this.selectPicture} />)
     ]
   }
 
