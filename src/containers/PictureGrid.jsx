@@ -10,6 +10,8 @@ import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
 import PictureLoader from '../components/PictureLoader';
 
+import Masonry from 'react-masonry-component';
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -79,7 +81,12 @@ class PictureGrid extends Component {
 
     return (
       <Container>
-        {pictures && this.renderPictures(pictures)}
+         <Masonry
+            className={'masonry-gallery'}
+            onLayoutComplete={this.onLayoutComplete}
+        >
+            {this.renderPictures(pictures)}
+        </Masonry>
         {selectedPicture &&
           <SelectedPicture selectedPicture={selectedPicture}
           handleClick={this.selectPicture} />}
