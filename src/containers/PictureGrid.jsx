@@ -18,7 +18,11 @@ const Container = styled.div`
   justify-items: center;
   width:100%;
   margin: 5vmin 0;
-  `
+
+  @media (max-width: 399px) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+`
 
 class PictureGrid extends Component {
   static propTypes = {
