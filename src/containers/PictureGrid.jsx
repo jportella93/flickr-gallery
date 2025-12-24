@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import throttle from 'lodash.throttle';
 
 import { API } from '../store/middlewares/apiService'
+import { PICTURES_API_URL } from '../config/api.config';
+import { normalizeFlickrPublicFeed } from '../utils/pictures';
 
 import Picture from '../components/Picture'
 import SelectedPicture from '../components/SelectedPicture'
@@ -14,7 +16,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   row-gap: 5vmin;
-  column-gap:5vim;
+  column-gap: 5vmin;
   justify-items: center;
   width:100%;
   margin: 5vmin 0;
@@ -24,29 +26,36 @@ class PictureGrid extends Component {
   static propTypes = {
     pictures: PropTypes.array,
     selectedPicture: PropTypes.object,
+    isLoading: PropTypes.bool,
+    error: PropTypes.string,
     fetchPictures: PropTypes.func.isRequired,
     selectPicture: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    // Initial two calls to server
-    this.props.fetchPictures()
-    this.props.fetchPictures()
+  componentDidMount() {
+    // Initial call
+    this.props.fetchPictures();
 
-    //throttle method to avoid unnecesary calls to server
-    this.lazyFetchPictures = throttle(this.props.fetchPictures, 500)
+    // throttle method to avoid unnecessary calls
+    this.lazyFetchPictures = throttle(this.props.fetchPictures, 750);
 
-    this.listenForScrollAndFetch() // From this point on, only fetch on scroll
+    this.listenForScrollAndFetch(); // From this point on, only fetch on scroll
+  }
+
+  componentWillUnmount() {
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    if (this.lazyFetchPictures?.cancel) this.lazyFetchPictures.cancel();
   }
 
   // fetch new pictures when scrolled almost till the bottom
   listenForScrollAndFetch = () => {
-    window.addEventListener('scroll', (e) => {
+    this.onScroll = () => {
       if (window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - window.innerHeight/0.5) {
         this.lazyFetchPictures()
       }
-    })
+    };
+    window.addEventListener('scroll', this.onScroll);
   }
 
   renderPictures = (pictures) => {
@@ -74,12 +83,17 @@ class PictureGrid extends Component {
   }
 
   render() {
-    const { pictures, selectedPicture } = this.props;
-
-
+    const { pictures, selectedPicture, isLoading, error } = this.props;
     return (
       <Container>
+        {error && (
+          <div style={{ maxWidth: 700, padding: '0 16px', textAlign: 'center' }}>
+            <h2>Couldn’t load pictures</h2>
+            <p>{error}</p>
+          </div>
+        )}
         {pictures && this.renderPictures(pictures)}
+        {!pictures?.length && isLoading && this.renderPictureLoaders(8)}
         {selectedPicture &&
           <SelectedPicture selectedPicture={selectedPicture}
           handleClick={this.selectPicture} />}
@@ -90,14 +104,17 @@ class PictureGrid extends Component {
 
 const mapStateToProps = state => ({
   pictures: state.pictures.pictureList,
-  selectedPicture: state.pictures.selectedPicture
+  selectedPicture: state.pictures.selectedPicture,
+  isLoading: state.pictures.isLoading,
+  error: state.pictures.error,
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchPictures: () => dispatch({
     type: 'FETCH_PICTURES',
     [API]: {
-      path: '/pictures'
+      url: PICTURES_API_URL,
+      transform: normalizeFlickrPublicFeed,
     }
   }),
   selectPicture: (picture) => dispatch({

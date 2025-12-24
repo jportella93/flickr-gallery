@@ -12,17 +12,15 @@ export default class Picture extends Component {
   };
 
   render() {
-    const { picture, handleClick }                = this.props,
-          { first_name:name, last_name:surname,
-          id }                                    = picture.ownerInfo.profile
+    const { picture, handleClick } = this.props;
 
     return (
       <div className="Picture" onClick={() => handleClick(picture)}>
-        <img src={getAvailableSize(picture)} alt={picture.title || 'Picture title'}/>
+        <img src={getAvailableSize(picture)} alt={picture.title || 'Picture'} />
         <div className="Picture__img-mask">
           <h2 className="Picture__title">
             {picture.title || 'Untitled'} <br/> <br/>
-            <span>By {`${name || id} ${surname || ''}`}</span>
+            <span>By {picture.authorName || 'Unknown'}</span>
           </h2>
         </div>
       </div>

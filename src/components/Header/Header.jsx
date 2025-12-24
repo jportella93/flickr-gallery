@@ -12,8 +12,9 @@ export default class Header extends Component {
         <p>Made by <a href="https://www.linkedin.com/in/jonportella/">Jon Portella</a>.<br/>
         Front end made with <a href="https://reactjs.org/">React</a> and
         <a href="https://redux.js.org/"> Redux</a>.
-        Back end made with <a href="https://koajs.com/">Koa</a>.
-        Content from <a href="https://www.flickr.com/services/api/">flickr API.</a></p>
+        For this demo deployment, the app uses a small
+        <a href="https://developers.cloudflare.com/pages/functions/"> Cloudflare Pages Function</a>
+        {' '}as a proxy so the browser can access the Flickr public feed.</p>
       </div>
     )
   }

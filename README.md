@@ -1,45 +1,43 @@
-# Flickr gallery
+# Flickr gallery (demo-ready)
 
-<a href="https://jportella93.github.io/flickr-gallery/"><img src="https://imgur.com/9nhQD0M.png"/></a>
+Explore recent pictures uploaded to Flickr worldwide.
 
-*Explore the most recent images uploaded to Flickr worldwide.*
+This repo is **client-side** and is ready to deploy on **Cloudflare Pages**.
 
-👉 [Flickr gallery](https://jportella93.github.io/flickr-gallery/)
+## How it works (no separate backend needed)
 
+Browsers can’t call the Flickr public feed directly due to CORS, so this project includes a tiny Cloudflare Pages Function:
 
+- `functions/api/pictures.js` serves `GET /api/pictures` and proxies the Flickr public feed with permissive CORS headers.
 
-## Getting started
+In local development, Vite proxies `GET /api/pictures` to Flickr as well (see `vite.config.js`).
 
-**1.** Go to the [server](https://github.com/jportella93/flickr-gallery-server) and follow the getting started. Once you've got it running come back here.
+## Local development
 
-**2.** Clone the repo
+Install dependencies:
 
-````
-$ git clone https://github.com/jportella93/flickr-gallery.git
-$ cd flickr-gallery
-````
-
-**3.** Install dependencies:
-
-```
-$ yarn install
+```bash
+yarn install
 ```
 
-or
+Start the dev server:
 
-    $ npm i
-
-**4.** Go to /src/config/api.config.js and make sure that line 1 (dev) is active and line 2 (prod) is commented out.
-
-**5.** Start the server
-
-```
-$ yarn start
+```bash
+yarn dev
 ```
 
-or
+## Deploy to Cloudflare Pages
 
-    $ npm start
+- **Build command**: `yarn build`
+- **Build output directory**: `dist`
+
+Cloudflare Pages Functions are picked up automatically from `functions/`.
+
+### Optional config
+
+You can override the pictures endpoint:
+
+- `VITE_PICTURES_API_URL` (defaults to `/api/pictures`)
 
 
 
