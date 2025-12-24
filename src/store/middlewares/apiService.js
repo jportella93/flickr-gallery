@@ -1,26 +1,53 @@
 export const API = Symbol('API');
 
-export default baseURL => store => next => action => {
+export default () => store => next => action => {
   if (action[API]) {
+    const {
+      url,
+      path = '',
+      method = 'GET',
+      body,
+      headers,
+      transform,
+    } = action[API];
+
+    const requestUrl = url ? `${url}${path}` : path;
+
     const options = {
+      method,
       headers: {
-        'Content-Type': 'application/json',
+        ...(body ? { 'Content-Type': 'application/json' } : {}),
+        ...(headers || {}),
       },
-      'method': action[API].method,
-      'body': JSON.stringify(action[API].body)
+      ...(body ? { body: JSON.stringify(body) } : {}),
     };
-    fetch(`${baseURL}${action[API].path}`, options)
-      .then(res => res.json())
-      .then(data => {
+
+    fetch(requestUrl, options)
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text().catch(() => '');
+          throw new Error(`Request failed (${res.status}): ${text || res.statusText}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
         const newAction = {
           ...action,
           type: action.type + '_SUCCESS',
-          data
+          data: typeof transform === 'function' ? transform(data) : data,
         };
         delete newAction[API];
         store.dispatch(newAction);
       })
-      .catch(e => e)
+      .catch((error) => {
+        const newAction = {
+          ...action,
+          type: action.type + '_FAILURE',
+          error: String(error?.message || error),
+        };
+        delete newAction[API];
+        store.dispatch(newAction);
+      });
   }
   next(action);
 };

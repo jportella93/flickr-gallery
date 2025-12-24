@@ -4,7 +4,6 @@ import './App.css';
 
 import PictureGrid from './containers/PictureGrid.jsx'
 import Header from './components/Header'
-import Spinner from './components/Spinner';
 
 class App extends Component {
   render() {
@@ -12,7 +11,6 @@ class App extends Component {
       <div className="App">
         <Header />
         <PictureGrid/>
-        <Spinner />
       </div>
     );
   }

@@ -3,7 +3,7 @@ import './styles.css'
 import PropTypes from 'prop-types';
 
 import { getAvailableSize } from '../../utils/pictures'
-import { getDateFromUnix } from '../../utils/date';
+import { getMonthYear } from '../../utils/date';
 import { sliceExtra } from '../../utils/strings';
 
 export default class SelectedPicture extends Component {
@@ -12,44 +12,53 @@ export default class SelectedPicture extends Component {
     handleClick: PropTypes.func.isRequired
   };
 
-  toPictureUrl = (owner, pId) => `https://www.flickr.com/photos/${owner}/${pId}`
-
-  toOwnerProfile = (owner) => `https://www.flickr.com/photos/${owner}`
-
   render() {
 
-    const { selectedPicture, handleClick }             = this.props,
-          { ownerInfo, owner, id, title }              = selectedPicture,
-          { first_name:name, last_name:surname,
-            city, country, profile_description:desc,
-            website, join_date, id:ownerId}                        = ownerInfo.profile
+    const { selectedPicture, handleClick } = this.props;
+    if (!selectedPicture) return null;
+
+    const {
+      title,
+      link,
+      authorName,
+      authorUrl,
+      published,
+      tags,
+      imageUrlLarge,
+      description,
+    } = selectedPicture;
 
     return (
       <div className="SelectedPicture__outer" onClick={()=> handleClick(null)}>
 
-        {selectedPicture &&
-          <div onClick={() => window.location = this.toPictureUrl(owner, id)}
-            className="SelectedPicture__inner-container" alt="Open picture on Flickr">
-
+        <div
+          className="SelectedPicture__inner-container"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <a href={link} target="_blank" rel="noreferrer">
             <h1>{sliceExtra(title,100) || 'Untitled'}</h1>
+          </a>
 
-            <img src={getAvailableSize(selectedPicture)}
-              alt={title || 'Picture'} />
+          <a href={link} target="_blank" rel="noreferrer">
+            <img
+              src={imageUrlLarge || getAvailableSize(selectedPicture)}
+              alt={title || 'Picture'}
+            />
+          </a>
 
-            <a href={this.toOwnerProfile(owner)} alt="Open user profile on Flickr">
-              <h2>By {`${name || ownerId } ${surname || ''}`}</h2>
-            </a>
+          <a href={authorUrl} target="_blank" rel="noreferrer">
+            <h2>By {authorName || 'Unknown'}</h2>
+          </a>
 
-            {join_date && <p>Flickr member from {getDateFromUnix(join_date)}</p>}
+          {published && <p>Published {getMonthYear(published)}</p>}
 
-            {desc && <p style={{fontStyle:'italic'}}>{sliceExtra(desc,300)}</p>}
+          {description && (
+            <p style={{ fontStyle: 'italic' }}>{sliceExtra(description, 300)}</p>
+          )}
 
-            {city || country ? <p>From {`${city || ''} ${country || ''}`}</p> : null}
+          {tags?.length ? <p>Tags: {tags.slice(0, 10).join(', ')}</p> : null}
 
-            {website && <h4><a href={website}>{website}</a></h4>}
-
-          </div>
-        }
+        </div>
       </div>
     )
   }

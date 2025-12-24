@@ -2,27 +2,27 @@
   "name": "gallery-challenge-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://jportella93.github.io/flickr-gallery",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "@atlaskit/css-reset": "^3.0.0",
+    "@atlaskit/css-reset": "^6.0.9",
     "lodash.throttle": "^4.1.1",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "styled-components": "^3.3.3"
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-is": "^19.1.1",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
+    "styled-components": "^5.3.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0"
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^7.0.4"
   }
 }
